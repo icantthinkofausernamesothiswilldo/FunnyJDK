@@ -141,6 +141,7 @@ import sun.nio.cs.UTF_8;
  * @jls     15.18.1 String Concatenation Operator +
  */
 
+@jdk.internal.ValueBased
 public final class String
     implements java.io.Serializable, Comparable<String>, CharSequence,
                Constable, ConstantDesc {
