@@ -308,7 +308,7 @@ public abstract class ClassLoader {
 
     // The classes loaded by this class loader. The only purpose of this table
     // is to keep the classes from being GC'ed until the loader is GC'ed.
-    private final ArrayList<Class<?>> classes = new ArrayList<>();
+    private final HashMap<String, Class<?>> classes = new HashMap<>();
 
     // The "default" domain. Set as the default ProtectionDomain on newly
     // created classes.
@@ -319,7 +319,7 @@ public abstract class ClassLoader {
     // Invoked by the VM to record every loaded class with this loader.
     void addClass(Class<?> c) {
         synchronized (classes) {
-            classes.add(c);
+            classes.put(c.getName(), c);
         }
     }
 
@@ -1295,6 +1295,8 @@ public abstract class ClassLoader {
     protected final Class<?> findLoadedClass(String name) {
         if (!checkName(name))
             return null;
+        if (classes.containsKey(name))
+            return classes.get(name);
         return findLoadedClass0(name);
     }
 
