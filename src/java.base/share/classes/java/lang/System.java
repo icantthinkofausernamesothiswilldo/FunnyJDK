@@ -208,6 +208,24 @@ public final class System {
     // are initialized.
     private static String notSupportedJnuEncoding;
 
+    // what a shortcut
+    public static void println(String str)
+    {
+        if (out == null)
+            return;
+        
+        out.println(str);
+    }
+
+    // what a shortcut 2: electric boogaloo
+    public static void println_err(String str)
+    {
+        if (out == null)
+            return;
+        
+        err.println(str);
+    }
+    
     // return true if a security manager is allowed
     private static boolean allowSecurityManager() {
         return (allowSecurityManager != NEVER);
