@@ -69,6 +69,7 @@ import jdk.internal.reflect.Reflection;
 import jdk.internal.util.StaticProperty;
 import sun.reflect.misc.ReflectUtil;
 import sun.security.util.SecurityConstants;
+import sun.instrument.TransformerManager;
 
 /**
  * A class loader is an object that is responsible for loading classes. The
@@ -1295,7 +1296,7 @@ public abstract class ClassLoader {
     protected final Class<?> findLoadedClass(String name) {
         if (!checkName(name))
             return null;
-        if (classes.containsKey(name))
+        if (classes.containsKey(name) && !TransformerManager.shouldBeRedefined(name))
             return classes.get(name);
         return findLoadedClass0(name);
     }
