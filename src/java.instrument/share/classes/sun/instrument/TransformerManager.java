@@ -28,6 +28,8 @@ package sun.instrument;
 import java.lang.instrument.Instrumentation;
 import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
+import java.util.List;
+import java.util.ArrayList;
 
 /*
  * Copyright 2003 Wily Technology, Inc.
@@ -79,6 +81,22 @@ public class TransformerManager
      * Is this TransformerManager for transformers capable of retransformation?
      */
     private boolean            mIsRetransformable;
+
+    // class transforming is just alotta redefining so don't question uh
+
+    // uh
+    default static final List<String> classesToBeRedefined = new ArrayList();
+
+    public static void removeFromClassesToBeRedefined(String cName)
+    {
+        classesToBeRedefined.remove(cName);
+    }
+
+    public static boolean shouldBeRedefined(String cName)
+    {
+        return classesToBeRedefined.contains(cName);
+    }
+    // uh's end
 
     TransformerManager(boolean isRetransformable) {
         mTransformerList    = new TransformerInfo[0];
