@@ -184,6 +184,21 @@ import java.security.ProtectionDomain;
 public interface ClassFileTransformer {
 
     /**
+     * the simplified transform method
+     * calls when no other methods are being overriden
+     * use it if you don't care about performance (despite the impact likely being very low) and don't like typing a lot
+     * 
+     * @implSpec, as with the legacy (slightly less simple but the simplest one in normal jdk), it returns null
+     * 
+     * @param className             the name of the class being transformed
+     * @param classfileBuffer       the bytecode of the class being transformed
+     */
+    default byte[] transform(String className, byte[] classfileBuffer) throws IllegalClassFormatException
+    {
+        return null;
+    }
+    
+    /**
      * Transforms the given class file and returns a new replacement class file.
      * This method is invoked when the {@link Module Module} bearing {@link
      * ClassFileTransformer#transform(Module,ClassLoader,String,Class,ProtectionDomain,byte[])
@@ -215,7 +230,9 @@ public interface ClassFileTransformer {
                 ProtectionDomain    protectionDomain,
                 byte[]              classfileBuffer)
         throws IllegalClassFormatException {
-        return null;
+
+        // cslls the simplified transform method
+        return transform(className, classfileBuffer);
     }
 
 
