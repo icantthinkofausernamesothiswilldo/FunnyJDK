@@ -192,6 +192,11 @@ public interface ClassFileTransformer {
      * 
      * @param className             the name of the class being transformed
      * @param classfileBuffer       the bytecode of the class being transformed
+     * 
+     * @throws IllegalClassFormatException
+     *         if the input is malformed
+     * @return a good, transformed class bytecode
+     *         could be also {@code null} if you don't want the transformation to modify the class
      */
     default byte[] transform(String className, byte[] classfileBuffer) throws IllegalClassFormatException
     {
