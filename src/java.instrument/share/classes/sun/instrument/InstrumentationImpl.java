@@ -222,6 +222,12 @@ public class InstrumentationImpl implements Instrumentation {
         if (classes.length == 0) {
             return; // no-op
         }
+
+        for (Class clazz : classes)
+        {
+            TransformerManager.classesToBeRedefined.add(clazz.getName());
+        }
+        
         retransformClasses0(mNativeAgent, classes);
     }
 
@@ -248,6 +254,12 @@ public class InstrumentationImpl implements Instrumentation {
         if (definitions.length == 0) {
             return; // short-circuit if there are no changes requested
         }
+
+        for (ClassDefinition cdef : definitions)
+        {
+            TransformerManager.classesToBeRedefined.add(cdef.getDefinitionClass().getName());
+        }
+        
         redefineClasses0(mNativeAgent, definitions);
     }
 
