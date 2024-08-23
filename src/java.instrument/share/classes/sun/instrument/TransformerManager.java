@@ -42,7 +42,7 @@ import java.util.ArrayList;
  */
 public class TransformerManager
 {
-    private class TransformerInfo {
+    class TransformerInfo {
         final ClassFileTransformer  mTransformer;
         String                      mPrefix;
 
@@ -85,7 +85,7 @@ public class TransformerManager
     // class transforming is just alotta redefining so don't question uh
 
     // uh
-    default static final List<String> classesToBeRedefined = new ArrayList();
+    static final List<String> classesToBeRedefined = new ArrayList();
 
     public static void removeFromClassesToBeRedefined(String cName)
     {
