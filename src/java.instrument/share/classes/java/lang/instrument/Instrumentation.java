@@ -150,6 +150,11 @@ public interface Instrumentation {
     isRetransformClassesSupported();
 
     /**
+     * get all the transformers at the current time
+     */
+    List<ClassFileTransformer> getAllCurrentTransformers();
+
+    /**
      * Retransform the supplied set of classes.
      *
      * <P>
