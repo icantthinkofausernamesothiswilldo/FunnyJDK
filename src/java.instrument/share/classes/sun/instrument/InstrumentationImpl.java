@@ -127,6 +127,19 @@ public class InstrumentationImpl implements Instrumentation {
     }
 
     @Override
+    public List<ClassFileTransformer> getCurrentTransformers()
+    {
+        List<ClassFileTransformer> list = new ArrayList<>();
+        
+        for (TransformerInfo info : mTransformerManager.getSnapshotTransformerList())
+        {
+            list.add(info.mTransformer);
+        }
+
+        return list;
+    }
+
+    @Override
     public void addTransformer(ClassFileTransformer transformer) {
         addTransformer(transformer, false);
     }
